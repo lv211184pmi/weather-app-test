@@ -1,0 +1,10 @@
+<div class="search">
+  <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+    <label for="city">Please choose a city</label>
+    <input type="text" id="city" required>
+    <button type="submit">Search city</button>
+  </form>
+  <div>
+    <span class="info">Your city is:</span>City name
+  </div>
+</div>
