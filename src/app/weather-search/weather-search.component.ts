@@ -13,6 +13,7 @@ export class WeatherSearchComponent implements OnInit {
   constructor(private _weatherService: WeatherService) { }
 
   onSubmit(form: FormGroup) {
+    console.log(form.value.location);
     this._weatherService.searchWeatherData(form.value.location)
       .subscribe(
         data => {
