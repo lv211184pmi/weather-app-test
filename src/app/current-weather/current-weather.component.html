@@ -1,8 +1,19 @@
-<div class="contianer">
-  <h1>{{currentWeather.cityName}}</h1>
-  <h2>{{currentWeather.temp}}</h2>
-  <div class="image">
-    <img src="http://openweathermap.org/img/w/{{currentWeather}}.png" alt="sun">
+<div class="container">
+  <div id="data-container">
+    <md-card-title>{{myWeather.cityName}}</md-card-title>
+    <img md-card-avatar src="https://openweathermap.org/img/w/{{myWeather.icon}}.png" alt="img broken">
+    <md-card-content id="temp">
+      {{myWeather.temp}}<span style="font-size: 100px;">&#8451;</span>
+    </md-card-content>
+    <md-card-footer>{{myWeather.weatherKind}}...</md-card-footer>
+  </div><br><br>
+
+  <div class="input-data">
+    <md-input-container>
+      <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+        <input mdInput type="text" placeholder="Name of the city" name="location" ngModel required>
+        <button class="myButton" name="button">Search city</button>
+      </form>
+    </md-input-container>
   </div>
-  <h3>{{currentWeather.weatherKind}}</h3>
 </div>

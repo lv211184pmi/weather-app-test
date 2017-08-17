@@ -1,42 +1,42 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgModule } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { NgForm } from '@angular/forms';
+import 'rxjs/Rx';
+
 import { WeatherService } from '../shared/weather.service';
 import { WeatherItem } from '../shared/weather-item';
+import {MdButtonModule, MdCheckboxModule} from '@angular/material';
+
+@NgModule({
+  imports: [MdButtonModule, MdCheckboxModule]
+})
 
 @Component({
   selector: 'app-current-weather',
   templateUrl: './current-weather.component.html',
   styleUrls: ['./current-weather.component.css']
 })
+
 export class CurrentWeatherComponent implements OnInit {
-  currentWeather: WeatherItem;
-  constructor(private _locationService: WeatherService) { }
-  location;
+  myWeather: WeatherItem;
+  constructor(private _locationService: WeatherService, private route: ActivatedRoute) { }
+
+  onSubmit(form: NgForm) {
+    this._locationService.otherCityWeather(form.value.location)
+      .subscribe(
+        (data) => {
+          this.myWeather = new WeatherItem(data.name,
+                                           data.main.temp,
+                                           data.weather[0].icon,
+                                           data.weather[0].description);
+        })
+  }
 
   ngOnInit() {
-    // navigator.geolocation.getCurrentPosition((pos) => {
-    //   this.location = pos.coords;
-    //   const lat = this.location.latitude;
-    //   const lon = this.location.longitude;
-    //   this._locationService.localWeatherData(lat, lon)
-    //     .subscribe(
-    //       data => {
-    //         this.currentWeather = new WeatherItem(data.name,
-    //                                               data.main.temp,
-    //                                               data.weather[0].icon,
-    //                                               data.weather[0].description)
-    //       }
-    //     );
-    // });
-    this.currentWeather = this._locationService.weatherNow();
-    navigator.geolocation.getCurrentPosition((pos) => {
-      this.location = pos.coords;
-      const lat = this.location.latitude;
-      const lon = this.location.longitude;
-      this._locationService.localWeatherData(lat, lon)
-        .subscribe(
-          (data) => {
-            console.log(data);
-          })
-    })
+    this.route.data.subscribe(
+      (data: {myWeather: WeatherItem}) => {
+        this.myWeather = data.myWeather;
+      }
+    )
   }
 }

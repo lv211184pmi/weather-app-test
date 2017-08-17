@@ -1,0 +1,24 @@
+
+md-card-title{
+    color: 	#5F9EA0;
+    font-size: 52px;
+    font-family: "Courier New", Monospace;
+    font-weight: bold; 
+}
+
+md-card-footer{
+    color: #008B8B;
+}	
+
+img{
+    width: 200px;
+    height: 200px;
+}
+
+#temp{
+    font-size: 150px;
+}
+form{
+  display: flex;
+  padding: 10px;
+}
