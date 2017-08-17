@@ -1,3 +1,6 @@
 export class WeatherItem {
-    constructor(public cityName: string, public description: string, public temperature: number) {}
+    constructor(public cityName: string, 
+                public temp: string, 
+                public icon:string,
+                public weatherKind: string) {}
 }

@@ -12,17 +12,16 @@ export class WeatherSearchComponent implements OnInit {
 
   constructor(private _weatherService: WeatherService) { }
 
-  onSubmit(form: FormGroup) {
-    console.log(form.value.location);
-    this._weatherService.searchWeatherData(form.value.location)
-      .subscribe(
-        data => {
-          const WEATHER_ITEM = new WeatherItem(data.name, data.weather[0].description,
-          data.main.temp);
-          this._weatherService.addWeatherItem(WEATHER_ITEM);
-        }
-      );
-  }
+  // onSubmit(form: FormGroup) {
+  //   this._weatherService.searchWeatherData(form.value.location)
+  //     .subscribe(
+  //       data => {
+  //         const WEATHER_ITEM = new WeatherItem(data.name, data.weather[0].description,
+  //         data.main.temp);
+  //         this._weatherService.addWeatherItem(WEATHER_ITEM);
+  //       }
+  //     );
+  // }
 
   ngOnInit() {
   }
